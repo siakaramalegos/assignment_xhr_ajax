@@ -23,8 +23,7 @@ var $ = {
 
   // In the options, url, method, and async are required
   ajax: function(options){
-    var headers = options.headers; // object
-    var data, contentType;
+    var data;
 
     // Instantiate the XHR object
     var xhr = new XMLHttpRequest();
@@ -51,6 +50,24 @@ var $ = {
       }
     }
 
+    xhr.send(data);
+  },
+
+  get: function(url, data, success){
+    var data;
+
+    // Instantiate the XHR object
+    var xhr = new XMLHttpRequest();
+
+    // Set up callbacks - these should take an event argument
+    xhr.addEventListener( "load", success);
+
+    // Convert data to something that can be sent
+    if ( data ) {
+      data = JSON.stringify(data);
+    }
+
+    xhr.open('GET', url, true);
     xhr.send(data);
   }
 
@@ -114,3 +131,5 @@ var options3 = {
 $.ajax(options1);
 $.ajax(options2);
 $.ajax(options3);
+
+$.get("http://reqres.in/api/unknown/2", null, completeFunction);

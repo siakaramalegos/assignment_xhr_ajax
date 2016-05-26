@@ -69,6 +69,24 @@ var $ = {
 
     xhr.open('GET', url, true);
     xhr.send(data);
+  },
+
+  post: function(url, data, success){
+    var data;
+
+    // Instantiate the XHR object
+    var xhr = new XMLHttpRequest();
+
+    // Set up callbacks - these should take an event argument
+    xhr.addEventListener( "load", success);
+
+    // Convert data to something that can be sent
+    if ( data ) {
+      data = JSON.stringify(data);
+    }
+
+    xhr.open('POST', url, true);
+    xhr.send(data);
   }
 
 };
@@ -128,8 +146,9 @@ var options3 = {
   error: errorFunction
 };
 
-$.ajax(options1);
-$.ajax(options2);
-$.ajax(options3);
+// $.ajax(options1);
+// $.ajax(options2);
+// $.ajax(options3);
 
 $.get("http://reqres.in/api/unknown/2", null, completeFunction);
+$.post(options2.url, options2.data, completeFunction);
